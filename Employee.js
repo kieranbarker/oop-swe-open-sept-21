@@ -2,6 +2,22 @@
  * A class that represents an employee.
  */
 class Employee {
+  /** The next available ID. */
+  static nextId = 1;
+
+  /**
+   * Advances the next available ID.
+   * @returns {number} The next available ID.
+   */
+  static advanceId() {
+    const temp = Employee.nextId;
+    Employee.nextId++;
+    return temp;
+  }
+
+  /** The employee's automatically assigned ID. */
+  id = Employee.advanceId();
+
   /**
    * Creates a new Employee object.
    * @param {string} name The employee's name.
@@ -10,6 +26,14 @@ class Employee {
   constructor(name, salary) {
     this.name = name;
     this.salary = salary;
+  }
+
+  /**
+   * Gets an employee's salary.
+   * @returns {number} The employee's salary.
+   */
+  getSalary() {
+    return this.salary;
   }
 
   /**
