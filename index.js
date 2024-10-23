@@ -4,7 +4,7 @@ const Manager = require("./Manager.js");
 
 // Creates a Manager object and sets its bonus.
 const employee0 = new Manager("Carl Cracker", 75_000);
-employee0.bonus = 5000;
+employee0.setBonus(5000);
 
 // Creates two Employee objects.
 const employee1 = new Employee("Harry Hacker", 50_000);

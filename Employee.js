@@ -3,20 +3,26 @@
  */
 class Employee {
   /** The next available ID. */
-  static nextId = 1;
+  static #nextId = 1;
 
   /**
    * Advances the next available ID.
    * @returns {number} The next available ID.
    */
-  static advanceId() {
-    const temp = Employee.nextId;
-    Employee.nextId++;
+  static #advanceId() {
+    const temp = Employee.#nextId;
+    Employee.#nextId++;
     return temp;
   }
 
   /** The employee's automatically assigned ID. */
-  id = Employee.advanceId();
+  #id = Employee.#advanceId();
+
+  /** The employee's name. */
+  #name;
+
+  /** The employee's salary. */
+  #salary;
 
   /**
    * Creates a new Employee object.
@@ -24,8 +30,24 @@ class Employee {
    * @param {number} salary The employee's salary.
    */
   constructor(name, salary) {
-    this.name = name;
-    this.salary = salary;
+    this.#name = name;
+    this.#salary = salary;
+  }
+
+  /**
+   * Gets an employee's ID.
+   * @returns {number} The employee's ID.
+   */
+  getId() {
+    return this.#id;
+  }
+
+  /**
+   * Gets an employee's name.
+   * @returns {string} The employee's name.
+   */
+  getName() {
+    return this.#name;
   }
 
   /**
@@ -33,7 +55,7 @@ class Employee {
    * @returns {number} The employee's salary.
    */
   getSalary() {
-    return this.salary;
+    return this.#salary;
   }
 
   /**
@@ -41,8 +63,12 @@ class Employee {
    * @param {number} byPercent The percentage increase.
    */
   raiseSalary(byPercent) {
-    const raise = this.salary * (byPercent / 100);
-    this.salary += raise;
+    if (byPercent <= 0) {
+      throw new RangeError("Percentage must be positive.");
+    }
+
+    const raise = this.#salary * (byPercent / 100);
+    this.#salary += raise;
   }
 }
 
